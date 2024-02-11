@@ -4,15 +4,21 @@
 
 Asegurarse de tener instalado "pnpm", "serverless" y "docker" en su sistema.
 
-## Levantar base de datos local
+## Levantar entorno local
+
+#### Variables de entorno
+
+Copiar archivo ".env.example" a ".env" y configurar las variables de entorno necesarias
+
+#### Levantar base de datos local
 
     pnpm db:up
 
-## Levantar en desarrollo
+#### Levantar en desarrollo
 
     pnpm sls:dev
 
-## Instartar data ficticia en DB
+#### Instartar data ficticia en DB
 
     GET /seed
 
