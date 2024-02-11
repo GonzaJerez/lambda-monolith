@@ -1,0 +1,28 @@
+service: lambda-monolith
+
+provider:
+  name: aws
+  region: sa-east-1
+  stage: dev
+
+package:
+  patterns:
+    - '!**/**'
+    - 'dist/main'
+
+functions:
+  main:
+    handler: dist/main.handler
+    name: lambda-monolith-dev
+    runtime: nodejs20.x
+    timeout: 15
+    events:
+      - httpApi:
+          path: /
+          method: ANY
+      - httpApi:
+          path: '/{proxy+}'
+          method: ANY
+
+plugins:
+  - serverless-offline

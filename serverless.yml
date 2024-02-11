@@ -1,0 +1,22 @@
+service: lambda-monolith
+
+provider:
+  name: aws
+  region: sa-east-1
+  stage: prod
+
+package:
+  patterns:
+    - '!**/**'
+    - dist/main
+
+functions:
+  main:
+    handler: dist/main.handler
+    name: lambda-monolith
+    url: true
+    runtime: nodejs20.x
+    timeout: 15
+
+plugins:
+  - serverless-offline
