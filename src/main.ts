@@ -1,33 +1,11 @@
-import { NestFactory } from '@nestjs/core';
-import serverlessExpress from '@codegenie/serverless-express';
-import { Callback, Context, Handler } from 'aws-lambda';
-import { AppModule } from './app.module';
+import { httpServer } from './init.http';
+import { config } from 'dotenv';
+config();
 
-let server: Handler;
+// Export handler to initialize lambdas
+export { handler } from './init.serverless';
 
-async function bootstrap(): Promise<Handler> {
-  const app = await NestFactory.create(AppModule);
-
-  await app.init();
-  const expressApp = app.getHttpAdapter().getInstance();
-  return serverlessExpress({ app: expressApp });
+// If is in dev environment initialize http server
+if (process.env.SERVER_MODE === 'http') {
+  httpServer();
 }
-
-export const handler: Handler = async (
-  event: any,
-  context: Context,
-  callback: Callback,
-) => {
-  server = server ?? (await bootstrap());
-  return server(event, context, callback);
-};
-
-/**
- * DEVELOPMENT
- */
-// async function bootstrap() {
-//   const app = await NestFactory.create(AppModule);
-
-//   await app.listen(3000);
-// }
-// bootstrap();

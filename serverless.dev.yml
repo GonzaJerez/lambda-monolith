@@ -4,16 +4,18 @@ provider:
   name: aws
   region: sa-east-1
   stage: dev
+  environment:
+    SERVER_MODE: serverless
 
 package:
   patterns:
     - '!**/**'
-    - 'dist/main'
+    - dist/main.js
 
 functions:
   main:
     handler: dist/main.handler
-    name: lambda-monolith-dev
+    url: true
     runtime: nodejs20.x
     timeout: 15
     events:
