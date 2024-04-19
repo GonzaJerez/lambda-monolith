@@ -10,9 +10,10 @@ import Joi from 'joi';
   imports: [
     ConfigModule.forRoot({
       validationSchema: Joi.object({
-        DB_NAME: Joi.string().required(),
         NODE_ENV: Joi.string().valid('prod', 'dev').required(),
         SERVER_MODE: Joi.string().valid('http', 'serverless').required(),
+        HTTP_PORT: Joi.number().optional(),
+        DB_NAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
         DB_USERNAME: Joi.string().required(),
         DB_HOST: Joi.string().required(),

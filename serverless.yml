@@ -20,21 +20,13 @@ functions:
     runtime: nodejs20.x
     timeout: 15
     environment:
-      NODE_ENV: ${env:NODE_ENV}
+      NODE_ENV: prod
       DB_PASSWORD: ${env:DB_PASSWORD}
       DB_USERNAME: ${env:DB_USERNAME}
       DB_NAME: ${env:DB_NAME}
       DB_HOST: ${env:DB_HOST}
       DB_PORT: ${env:DB_PORT}
-      NODE_ENV: ${env:NODE_ENV}
-      SERVER_MODE: ${env:SERVER_MODE}
-    vpc:
-      securityGroupIds:
-        - sg-00b4db2785d26fae4
-      subnetIds:
-        - subnet-0d002a41b938b6482
-        - subnet-0beeafe4072ea10fd
-        - subnet-032952a3e6dd51b23
+      SERVER_MODE: serverless
 
 plugins:
   - serverless-offline
